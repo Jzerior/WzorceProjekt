@@ -51,4 +51,47 @@ public class Product {
 
     public String getCategory() { return category; }
     public void setCategory(String category) { this.category = category; }
+
+    public static class Builder {
+        private String name;
+        private String description;
+        private BigDecimal price;
+        private int stockQuantity;
+        private String category;
+
+        public Builder name(String name) {
+            this.name = name;
+            return this;
+        }
+
+        public Builder description(String description) {
+            this.description = description;
+            return this;
+        }
+
+        public Builder price(BigDecimal price) {
+            this.price = price;
+            return this;
+        }
+
+        public Builder stockQuantity(int stockQuantity) {
+            this.stockQuantity = stockQuantity;
+            return this;
+        }
+
+        public Builder category(String category) {
+            this.category = category;
+            return this;
+        }
+
+        public Product build() {
+            Product product = new Product();
+            product.setName(this.name);
+            product.setDescription(this.description);
+            product.setPrice(this.price);
+            product.setStockQuantity(this.stockQuantity);
+            product.setCategory(this.category);
+            return product;
+        }
+    }
 }
