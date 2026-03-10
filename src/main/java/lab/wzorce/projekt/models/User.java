@@ -70,4 +70,40 @@ public class User {
     public void setPassword(String password) {
         this.password = password;
     }
+
+    public static class Builder {
+        private String login;
+        private String email;
+        private String password;
+        private String privilege = "user";
+
+        public Builder login(String login) {
+            this.login = login;
+            return this;
+        }
+
+        public Builder email(String email) {
+            this.email = email;
+            return this;
+        }
+
+        public Builder password(String password) {
+            this.password = password;
+            return this;
+        }
+
+        public Builder privilege(String privilege) {
+            this.privilege = privilege;
+            return this;
+        }
+
+        public User build() {
+            User user = new User();
+            user.setLogin(this.login);
+            user.setEmail(this.email);
+            user.setPassword(this.password);
+            user.setPrivilege(this.privilege);
+            return user;
+        }
+    }
 }
