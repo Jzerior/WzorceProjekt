@@ -1,8 +1,10 @@
 package lab.wzorce.projekt.utils.singletons;
 
+// Tydzień 1, Wzorzec Singleton 3
+// Wzorzec projektowy Singleton zaimplementowany metodą zachłannej inicjalizacji. Instancja jest tworzona już podczas ładowania klasy,
+// a prywatny konstruktor zawiera dodatkowe zabezpieczenie przed próbą utworzenia kolejnego obiektu za pomocą mechanizmu refleksji.
 public class TaxCalculator {
 
-    // Eager initialization
     private static final TaxCalculator INSTANCE = new TaxCalculator();
 
     private TaxCalculator() {
@@ -19,3 +21,4 @@ public class TaxCalculator {
         return netPrice * 0.23;
     }
 }
+// Koniec, Tydzień 1, Wzorzec Singleton 3.

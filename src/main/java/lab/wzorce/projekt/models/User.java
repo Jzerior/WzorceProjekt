@@ -71,6 +71,9 @@ public class User {
         this.password = password;
     }
 
+    // Tydzień 1, Wzorzec Builder 1
+    // Wzorzec projektowy Builder zaimplementowany w formie statycznej klasy zagnieżdżonej.
+    // Umożliwia krokowe i czytelne tworzenie złożonego obiektu User), pozwalając na elastyczne ustawianie atrybutów bez potrzeby tworzenia skomplikowanych konstruktorów.
     public static class Builder {
         private String login;
         private String email;
@@ -106,4 +109,5 @@ public class User {
             return user;
         }
     }
+    // Koniec, Tydzień 1, Wzorzec Builder 1.
 }

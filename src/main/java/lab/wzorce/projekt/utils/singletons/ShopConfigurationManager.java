@@ -1,8 +1,10 @@
 package lab.wzorce.projekt.utils.singletons;
 
+// Tydzień 1, Wzorzec Singleton 2
+// Wzorzec projektowy Singleton zaimplementowany metodą podwójnego sprawdzania  z leniwą inicjalizacją.
+// Zapewnia to bezpieczne wielowątkowo utworzenie instancji dopiero przy pierwszym wywołaniu, minimalizując narzut synchronizacji dzięki słowu kluczowemu volatile.
 public class ShopConfigurationManager {
 
-    //Lazy initialization
     private static volatile ShopConfigurationManager instance;
 
     private String defaultCurrency;
@@ -30,3 +32,4 @@ public class ShopConfigurationManager {
         this.defaultCurrency = defaultCurrency;
     }
 }
+// Koniec, Tydzień 1, Wzorzec Singleton 2.

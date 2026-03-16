@@ -70,6 +70,9 @@ public class Order {
     public BigDecimal getTotalPrice() { return totalPrice; }
     public void setTotalPrice(BigDecimal totalPrice) { this.totalPrice = totalPrice; }
 
+    // Tydzień 1, Wzorzec Builder 3
+    // Wzorzec projektowy Builder zaimplementowany w formie statycznej klasy zagnieżdżonej współpracującej z prywatnym konstruktorem.
+    // Hermetyzuje złożony proces tworzenia zamówienia, automatycznie przeliczając wartość koszyka przy dodawaniu produktów i ułatwiając zachowanie spójności encji.
     public static class Builder {
         private User user;
         private String status = "NEW";
@@ -110,4 +113,5 @@ public class Order {
             return new Order(this);
         }
     }
+    // Koniec, Tydzień 1, Wzorzec Builder 3.
 }

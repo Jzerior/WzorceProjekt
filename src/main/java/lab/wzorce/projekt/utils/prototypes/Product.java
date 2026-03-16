@@ -1,5 +1,8 @@
 package lab.wzorce.projekt.utils.prototypes;
 
+// Tydzień 1, Wzorzec Prototyp 1
+// Wzorzec projektowy Prototyp zaimplementowany z wykorzystaniem natywnego interfejsu Cloneable.
+// Umożliwia tworzenie dokładnych kopii  obiektu Product za pomocą nadpisanej metody clone(), co pozwala na szybkie powielanie przygotowanych instancji.
 public class Product implements Cloneable {
     private String name;
     private double price;
@@ -32,3 +35,4 @@ public class Product implements Cloneable {
         return "Product{name='" + name + "', price=" + price + ", category='" + category + "'}";
     }
 }
+// Koniec, Tydzień 1, Wzorzec Prototyp 1.

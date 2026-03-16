@@ -1,8 +1,10 @@
 package lab.wzorce.projekt.utils.singletons;
 
+// Tydzień 1, Wzorzec Singleton 1
+// Wzorzec projektowy Singleton zaimplementowany za pomocą typu wyliczeniowego - Enum.
+// Gwarantuje to utworzenie tylko jednej, globalnie dostępnej instancji obiektu AuditLogger w sposób odporny na wielowątkowość.
 public enum AuditLogger {
 
-    //Enum singleton
     INSTANCE;
 
     private final String logPrefix = "[SKLEP-AUDYT] ";
@@ -12,3 +14,4 @@ public enum AuditLogger {
         System.out.println(logPrefix + message);
     }
 }
+// Koniec, Tydzień 1, Wzorzec Singleton 1.

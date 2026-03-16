@@ -3,6 +3,9 @@ package lab.wzorce.projekt.utils.factories;
 import lab.wzorce.projekt.models.Product;
 import java.math.BigDecimal;
 
+// Tydzień 1, Wzorzec Fabryka 2
+// Wzorzec projektowy Fabryka zaimplementowany w formie statycznych metod fabrykujących.
+// Centralizuje i upraszcza proces tworzenia predefiniowanych produktów , ukrywając przed klientem logikę przypisywania kategorii i konwersji cen.
 public class ProductFactory {
 
     public static Product createModelKit(String name, double price, int stock) {
@@ -32,3 +35,4 @@ public class ProductFactory {
         return product;
     }
 }
+// Koniec, Tydzień 1, Wzorzec Fabryka 2.

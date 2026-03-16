@@ -52,6 +52,9 @@ public class Product {
     public String getCategory() { return category; }
     public void setCategory(String category) { this.category = category; }
 
+    // Tydzień 1, Wzorzec Builder 2
+    // Wzorzec projektowy Builder zaimplementowany jako statyczna klasa wewnętrzna.
+    // Pozwala na wygodne tworzenie encji Product o wielu parametrach za pomocą płynnego interfejsu, eliminując problem tzw. teleskopowych konstruktorów.
     public static class Builder {
         private String name;
         private String description;
@@ -94,4 +97,5 @@ public class Product {
             return product;
         }
     }
+    // Koniec, Tydzień 1, Wzorzec Builder 2.
 }
