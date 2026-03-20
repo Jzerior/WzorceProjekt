@@ -8,9 +8,11 @@ public class ShopConfigurationManager {
     private static volatile ShopConfigurationManager instance;
 
     private String defaultCurrency;
+    private final String shopName;
 
     private ShopConfigurationManager() {
         this.defaultCurrency = "PLN";
+        this.shopName = "Szczupak";
     }
 
     public static ShopConfigurationManager getInstance() {
@@ -27,6 +29,7 @@ public class ShopConfigurationManager {
     public String getDefaultCurrency() {
         return defaultCurrency;
     }
+    public String getShopName() {return shopName;}
 
     public void setDefaultCurrency(String defaultCurrency) {
         this.defaultCurrency = defaultCurrency;

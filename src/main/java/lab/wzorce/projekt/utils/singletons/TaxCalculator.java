@@ -20,5 +20,6 @@ public class TaxCalculator {
     public double calculateVat(double netPrice) {
         return netPrice * 0.23;
     }
+    public double getCurrentTax(){return 0.23;}
 }
 // Koniec, Tydzień 1, Wzorzec Singleton 3.
