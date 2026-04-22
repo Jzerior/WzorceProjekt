@@ -1,6 +1,6 @@
 package lab.wzorce.projekt.utils.visitors;
 
-// Tydzień 6, Wzorzec Iterator 2
+// Tydzień 6, Wzorzec Visitor 2
 public class FishingRodItem implements VisitableItem {
     private final String name;
     private final double price;
@@ -21,4 +21,4 @@ public class FishingRodItem implements VisitableItem {
         visitor.visit(this);
     }
 }
-//Koniec Tydzień 6, Wzorzec Iterator 2
+//Koniec Tydzień 6, Wzorzec Visitor 2

@@ -1,6 +1,6 @@
 package lab.wzorce.projekt.utils.visitors;
 
-// Tydzień 6, Wzorzec Iterator 1
+// Tydzień 6, Wzorzec Visitor 1
 public class DiscountVisitor implements Visitor {
     private double totalDiscount = 0;
 
@@ -23,4 +23,4 @@ public class DiscountVisitor implements Visitor {
         return totalDiscount;
     }
 }
-//Koniec Tydzień 6, Wzorzec Iterator 1
+//Koniec Tydzień 6, Wzorzec Visitor 1

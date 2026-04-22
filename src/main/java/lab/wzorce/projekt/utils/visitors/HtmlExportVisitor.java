@@ -1,6 +1,6 @@
 package lab.wzorce.projekt.utils.visitors;
 
-// Tydzień 6, Wzorzec Iterator 3
+// Tydzień 6, Wzorzec Visitor 3
 public class HtmlExportVisitor implements Visitor {
     private final StringBuilder htmlBuilder = new StringBuilder();
 
@@ -33,4 +33,4 @@ public class HtmlExportVisitor implements Visitor {
         return htmlBuilder.toString();
     }
 }
-//Koniec Tydzień 6, Wzorzec Iterator 3
+//Koniec Tydzień 6, Wzorzec Visitor 3
