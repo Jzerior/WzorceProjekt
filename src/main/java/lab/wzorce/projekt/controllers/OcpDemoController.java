@@ -4,7 +4,11 @@ import lab.wzorce.projekt.models.Order;
 import lab.wzorce.projekt.models.OrderItem;
 import lab.wzorce.projekt.models.Product;
 import lab.wzorce.projekt.utils.solid.ocp.abstraction.*;
+import lab.wzorce.projekt.utils.solid.ocp.abstraction.loyalty.BasePointsRule;
+import lab.wzorce.projekt.utils.solid.ocp.abstraction.loyalty.BigOrderBonusRule;
+import lab.wzorce.projekt.utils.solid.ocp.abstraction.loyalty.LoyaltyRewardService;
 import lab.wzorce.projekt.utils.solid.ocp.datadriven.DataDrivenFeeCalculator;
+import lab.wzorce.projekt.utils.solid.ocp.datadriven.DataDrivenReturnPolicy;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
@@ -23,7 +27,7 @@ public class OcpDemoController {
     public Map<String, Object> testOcp() {
         Map<String, Object> results = new LinkedHashMap<>();
 
-        // Przygotowanie mockowych danych (korzystamy z dostępnych w Twoim projekcie Builderów)
+        // Przygotowanie mockowych danych
         Product p1 = new Product.Builder().name("Wędka Karpiowa").price(new BigDecimal("120.0")).category("SPRZET_CIEZKI").build();
         Product p2 = new Product.Builder().name("Zestaw Haczyków").price(new BigDecimal("10.0")).category("AKCESORIA").build();
 
@@ -59,6 +63,37 @@ public class OcpDemoController {
 
         double totalFee = feeCalculator.calculateTotalHandlingFee(order);
         results.put("2_Oplaty_Sterowanie_Danymi", "Całkowita dodatkowa opłata manipulacyjna: " + totalFee + " PLN");
+
+        // 3. Test: OCP Poprzez Abstrakcję (Kalkulator Punktów Lojalnościowych)
+        // Rozszerzamy system o nowe promocje punktowe bez dotykania klasy LoyaltyRewardService.
+        LoyaltyRewardService loyaltyService = new LoyaltyRewardService();
+        loyaltyService.addRule(new BasePointsRule()); // Domyślna zasada (1 pkt za każde 10 PLN)
+        loyaltyService.addRule(new BigOrderBonusRule(300.0, 50)); // Bonus promocyjny
+
+        int earnedPoints = loyaltyService.calculateTotalPoints(order);
+        results.put("3_Punkty_Lojalnosciowe_Poprzez_Abstrakcje",
+                "Klient zdobył łącznie: " + earnedPoints + " punktów lojalnościowych");
+
+        // 4. Test: OCP Poprzez Sterowanie Danymi (Polityka Zwrotów)
+        // Rozszerzamy działanie kalkulatora zwrotów zasilając go nowymi regułami z zewnątrz.
+        DataDrivenReturnPolicy returnPolicy = new DataDrivenReturnPolicy(14); // Domyślnie 14 dni na zwrot
+
+        // Konfigurujemy zachowanie systemu poprzez dane
+        returnPolicy.addCategoryReturnRule("SPRZET_CIEZKI", 30);
+        returnPolicy.addCategoryReturnRule("AKCESORIA", 7);
+        returnPolicy.addCategoryReturnRule("ODZIEZ_BIELIZNA", 0);
+
+        int daysForProduct1 = returnPolicy.calculateReturnDays(p1);
+        int daysForProduct2 = returnPolicy.calculateReturnDays(p2);
+
+        // Przykładowy produkt bez zdefiniowanej reguły (użyje domyślnych 14 dni)
+        Product p3 = new Product.Builder().name("Zwykła żyłka").price(new java.math.BigDecimal("25.0")).category("INNE").build();
+        int daysForProduct3 = returnPolicy.calculateReturnDays(p3);
+
+        results.put("4_Zwroty_Sterowanie_Danymi",
+                "Dni na zwrot dla '" + p1.getName() + "': " + daysForProduct1 + " | " +
+                        "Dni na zwrot dla '" + p2.getName() + "': " + daysForProduct2 + " | " +
+                        "Dni na zwrot dla '" + p3.getName() + "': " + daysForProduct3);
 
         return results;
     }
