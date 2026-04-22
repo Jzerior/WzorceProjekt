@@ -1,6 +1,10 @@
 package lab.wzorce.projekt.controllers;
 
-import lab.wzorce.projekt.utils.solid.srp.*;
+import lab.wzorce.projekt.utils.solid.srp.delivery.Delivery;
+import lab.wzorce.projekt.utils.solid.srp.delivery.DeliveryCostCalculator;
+import lab.wzorce.projekt.utils.solid.srp.delivery.DeliveryLabelFormatter;
+import lab.wzorce.projekt.utils.solid.srp.delivery.DeliveryRepository;
+import lab.wzorce.projekt.utils.solid.srp.invoice.*;
 import lab.wzorce.projekt.utils.solid.srp.salary.*;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -57,6 +61,28 @@ public class SrpDemoController {
         // 4. Użycie logiki utrwalania danych (SalaryRepository)
         SalaryRepository repository = new SalaryRepository();
         results.put("3_Warstwa_Zapisu", repository.saveReport(employee));
+
+        return results;
+    }
+
+    @GetMapping("/delivery")
+    public Map<String, String> testSrpDeliverySystem() {
+        Map<String, String> results = new LinkedHashMap<>();
+
+        // 1. Użycie struktury Danych (Delivery)
+        Delivery delivery = new Delivery("Piotr Wędkarz", "ul. Karpiowa 10, Lublin", 12.5, 45.0);
+
+        // 2. Użycie logiki obliczeniowej (DeliveryCostCalculator)
+        DeliveryCostCalculator calculator = new DeliveryCostCalculator();
+        results.put("1_Logika_Biznesowa", "Całkowity koszt dostawy wynosi: " + calculator.calculateTotalCost(delivery) + " PLN");
+
+        // 3. Użycie logiki prezentacji (DeliveryLabelFormatter)
+        DeliveryLabelFormatter formatter = new DeliveryLabelFormatter(calculator);
+        results.put("2_Wygenerowana_Etykieta", "\n" + formatter.formatLabel(delivery));
+
+        // 4. Użycie logiki utrwalania danych (DeliveryRepository)
+        DeliveryRepository repository = new DeliveryRepository();
+        results.put("3_Warstwa_Zapisu", repository.saveDeliveryOrder(delivery));
 
         return results;
     }

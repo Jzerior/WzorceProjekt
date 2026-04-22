@@ -1,4 +1,4 @@
-package lab.wzorce.projekt.utils.solid.srp;
+package lab.wzorce.projekt.utils.solid.srp.invoice;
 
 import java.util.ArrayList;
 import java.util.List;

@@ -1,4 +1,4 @@
-package lab.wzorce.projekt.utils.solid.srp;
+package lab.wzorce.projekt.utils.solid.srp.invoice;
 
 // Tydzień 7, Zasada SRP (Single Responsibility Principle)
 // Klasa ma tylko jedną odpowiedzialność: przechowuje dane o pojedynczej pozycji na fakturze.

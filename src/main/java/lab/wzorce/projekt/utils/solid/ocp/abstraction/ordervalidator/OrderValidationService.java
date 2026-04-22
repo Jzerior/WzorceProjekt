@@ -1,4 +1,4 @@
-package lab.wzorce.projekt.utils.solid.ocp.abstraction;
+package lab.wzorce.projekt.utils.solid.ocp.abstraction.ordervalidator;
 
 import lab.wzorce.projekt.models.Order;
 import java.util.ArrayList;
