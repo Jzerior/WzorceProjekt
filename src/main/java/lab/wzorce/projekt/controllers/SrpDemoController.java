@@ -1,10 +1,10 @@
 package lab.wzorce.projekt.controllers;
 
-import lab.wzorce.projekt.utils.solid.srp.*;
 import lab.wzorce.projekt.utils.solid.srp.delivery.Delivery;
 import lab.wzorce.projekt.utils.solid.srp.delivery.DeliveryCostCalculator;
 import lab.wzorce.projekt.utils.solid.srp.delivery.DeliveryLabelFormatter;
 import lab.wzorce.projekt.utils.solid.srp.delivery.DeliveryRepository;
+import lab.wzorce.projekt.utils.solid.srp.invoice.*;
 import lab.wzorce.projekt.utils.solid.srp.salary.*;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;

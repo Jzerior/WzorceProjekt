@@ -3,10 +3,17 @@ package lab.wzorce.projekt.controllers;
 import lab.wzorce.projekt.models.Order;
 import lab.wzorce.projekt.models.OrderItem;
 import lab.wzorce.projekt.models.Product;
-import lab.wzorce.projekt.utils.solid.ocp.abstraction.*;
+import lab.wzorce.projekt.utils.solid.ocp.abstraction.discount.DiscountCalculator;
+import lab.wzorce.projekt.utils.solid.ocp.abstraction.discount.DiscountRule;
+import lab.wzorce.projekt.utils.solid.ocp.abstraction.discount.HighValueDiscountRule;
+import lab.wzorce.projekt.utils.solid.ocp.abstraction.discount.VipDiscountRule;
 import lab.wzorce.projekt.utils.solid.ocp.abstraction.loyalty.BasePointsRule;
 import lab.wzorce.projekt.utils.solid.ocp.abstraction.loyalty.BigOrderBonusRule;
 import lab.wzorce.projekt.utils.solid.ocp.abstraction.loyalty.LoyaltyRewardService;
+import lab.wzorce.projekt.utils.solid.ocp.abstraction.ordervalidator.ItemCountValidator;
+import lab.wzorce.projekt.utils.solid.ocp.abstraction.ordervalidator.MinOrderValueValidator;
+import lab.wzorce.projekt.utils.solid.ocp.abstraction.ordervalidator.OrderValidationService;
+import lab.wzorce.projekt.utils.solid.ocp.datadriven.DataDrivenDiscountPolicy;
 import lab.wzorce.projekt.utils.solid.ocp.datadriven.DataDrivenFeeCalculator;
 import lab.wzorce.projekt.utils.solid.ocp.datadriven.DataDrivenReturnPolicy;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -14,6 +21,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import java.math.BigDecimal;
+import java.util.Arrays;
 import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
@@ -94,6 +102,34 @@ public class OcpDemoController {
                 "Dni na zwrot dla '" + p1.getName() + "': " + daysForProduct1 + " | " +
                         "Dni na zwrot dla '" + p2.getName() + "': " + daysForProduct2 + " | " +
                         "Dni na zwrot dla '" + p3.getName() + "': " + daysForProduct3);
+
+
+        // Abstrakcja
+        List<DiscountRule> rules = Arrays.asList(
+                new VipDiscountRule(),
+                new HighValueDiscountRule()
+        );
+        DiscountCalculator abstractionCalculator = new DiscountCalculator(rules);
+
+        double discount1 = abstractionCalculator.calculateBestDiscount(1200.0, false); // Złapie się na HighValue
+        double discount2 = abstractionCalculator.calculateBestDiscount(800.0, true);   // Złapie się na VIP
+
+        results.put("1_Abstrakcja_Zamowienie1", "Zniżka dla koszyka 1200 PLN (Nie-VIP): " + discount1 + " PLN");
+        results.put("1_Abstrakcja_Zamowienie2", "Zniżka dla koszyka 800 PLN (VIP): " + discount2 + " PLN");
+
+
+        // Sterowanie danymi
+        DataDrivenDiscountPolicy dataDrivenPolicy = new DataDrivenDiscountPolicy();
+        dataDrivenPolicy.addCategoryDiscount("elektronika", 0.05); // 5%
+        dataDrivenPolicy.addCategoryDiscount("odziez", 0.20);      // 20%
+
+        double discountElectronics = dataDrivenPolicy.calculateDiscount("Elektronika", 3000.0);
+        double discountClothing = dataDrivenPolicy.calculateDiscount("Odziez", 250.0);
+        double discountToys = dataDrivenPolicy.calculateDiscount("Zabawki", 100.0); // Brak zniżki
+
+        results.put("2_DataDriven_Elektronika", "Zniżka na elektronikę (3000 PLN): " + discountElectronics + " PLN");
+        results.put("2_DataDriven_Odziez", "Zniżka na odzież (250 PLN): " + discountClothing + " PLN");
+        results.put("2_DataDriven_Zabawki", "Zniżka na zabawki (100 PLN): " + discountToys + " PLN");
 
         return results;
     }
