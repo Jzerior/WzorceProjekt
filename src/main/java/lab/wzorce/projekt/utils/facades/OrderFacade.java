@@ -19,6 +19,11 @@ public class OrderFacade {
     }
 
     public void placeOrder(Order order, double amount) {
+        // Tydzień 9, Clean Code -exception example
+        if (amount <= 0) {
+            throw new IllegalArgumentException("Nie można złożyć zamówienia. Kwota płatności musi być większa od 0, przekazano: " + amount);
+        }
+        // Koniec, Tydzień 9, Clean Code -exception example
         logger.log("Rozpoczęto proces zamówienia dla ID: " + order.getId());
 
         paymentProvider.processPayment(amount);
