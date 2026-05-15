@@ -17,6 +17,9 @@ public class FacadeDemoController {
 
     @GetMapping("/test")
     public String testFacades() {
+        long DUMMY_ORDER_ID = 101L;
+        double TEST_ORDER_AMOUNT = 2;
+
         StringBuilder result = new StringBuilder();
 
         MessageSender emailSender = new EmailSender();
@@ -24,9 +27,9 @@ public class FacadeDemoController {
 
         OrderFacade orderFacade = new OrderFacade(blik,emailSender);
         Order order = new Order();
-        order.setId(101L);
+        order.setId(DUMMY_ORDER_ID);
 
-        orderFacade.placeOrder(order, 2);
+        orderFacade.placeOrder(order, TEST_ORDER_AMOUNT);
         result.append("1. OrderFacade: Przetworzono zamówienie nr 101.\n");
 
         ReportFacade reportFacade = new ReportFacade();

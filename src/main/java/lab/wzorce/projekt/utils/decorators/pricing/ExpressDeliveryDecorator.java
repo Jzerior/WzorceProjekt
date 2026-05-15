@@ -8,9 +8,11 @@ public class ExpressDeliveryDecorator extends OrderCostDecorator {
         super(decoratedOrderCost);
     }
 
+    private static final double EXPRESS_DELIVERY_FEE = 25.00;
+
     @Override
     public double getCost() {
-        return super.getCost() + 25.00;
+        return super.getCost() + EXPRESS_DELIVERY_FEE;
     }
 
     @Override

@@ -8,9 +8,11 @@ public class GiftWrapDecorator extends OrderCostDecorator {
         super(decoratedOrderCost);
     }
 
+    private static final double WRAPPING_FEE = 15.00;
+
     @Override
     public double getCost() {
-        return super.getCost() + 15.00;
+        return super.getCost() + WRAPPING_FEE;
     }
 
     @Override
