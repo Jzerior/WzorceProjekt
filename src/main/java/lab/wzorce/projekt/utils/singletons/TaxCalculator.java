@@ -17,9 +17,11 @@ public class TaxCalculator {
         return INSTANCE;
     }
 
+    private static final double VAT_RATE = 0.23;
+
     public double calculateVat(double netPrice) {
-        return netPrice * 0.23;
+        return netPrice * VAT_RATE;
     }
-    public double getCurrentTax(){return 0.23;}
+    public double getCurrentTax(){return VAT_RATE;}
 }
 // Koniec, Tydzień 1, Wzorzec Singleton 3.
