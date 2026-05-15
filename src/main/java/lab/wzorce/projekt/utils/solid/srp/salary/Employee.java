@@ -8,6 +8,12 @@ public class Employee {
     private final double grossSalary;
 
     public Employee(String name, double grossSalary) {
+        // Tydzień 9, Clena Code - exception example
+        if (grossSalary < 0) {
+            throw new IllegalArgumentException("Wynagrodzenie brutto nie może być wartością ujemną. Przekazano: " + grossSalary);
+        }
+        // Koniec, Tydzień 9, Clean Code -exception example
+
         this.name = name;
         this.grossSalary = grossSalary;
     }

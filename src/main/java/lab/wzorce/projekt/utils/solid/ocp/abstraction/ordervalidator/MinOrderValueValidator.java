@@ -9,6 +9,12 @@ public class MinOrderValueValidator implements OrderValidator {
     private final BigDecimal minValue;
 
     public MinOrderValueValidator(double minValue) {
+        // Tydzień 9, Clean Code -exception example
+        if (minValue < 0) {
+            throw new IllegalArgumentException("Minimalna wartość zamówienia nie może być ujemna! Przekazano: " + minValue);
+        }
+        // Koniec, Tydzień 9, Clean Code -exception example
+
         this.minValue = BigDecimal.valueOf(minValue);
     }
 
